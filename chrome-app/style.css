@@ -1,0 +1,155 @@
+* {
+  padding: 0;
+  margin: 0;
+}
+body {
+  height: 1000px;
+}
+
+.hidden {
+  display: none !important;
+}
+
+ul,
+li {
+  color: white;
+  list-style: none;
+}
+
+button,
+input {
+  background: none;
+  border: none;
+  color: white;
+}
+
+button {
+  color: white;
+}
+
+#background {
+  width: 100%;
+  height: 100%;
+}
+
+main {
+  position: absolute;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  height: 100%;
+}
+
+h2 {
+  color: white;
+}
+
+form {
+  padding-bottom: 20px;
+  padding-top: 10px;
+}
+
+/***************** 시계 */
+.clock_back {
+  height: 500px;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+}
+
+.content {
+  height: 300px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.clock {
+  font-size: 140px;
+}
+
+.todo_back {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  height: 300px;
+}
+
+/*************** 로그인  */
+
+#login-form {
+  width: 400px;
+
+  display: flex;
+  flex-direction: row;
+  padding-left: 150px;
+}
+#login-form > input:first-child {
+  width: 200px;
+  height: 30px;
+  text-align: center;
+  border-bottom: 1px solid rgba(236, 223, 223, 0.648);
+}
+/* 로그인 버튼 */
+#login-form > input:nth-child(2) {
+  width: 100px;
+  height: 30px;
+  color: white;
+  font-style: italic;
+}
+
+#login-form > input::placeholder {
+  color: rgba(236, 223, 223, 0.648);
+  font-size: 20px;
+  font-style: italic;
+}
+/************************ 인사  */
+#greeting {
+  font-size: 30px;
+  text-align: center;
+}
+
+/************************ todo-list  */
+#todo-form {
+  width: 400px;
+  padding-left: 100px;
+}
+#todo-form > input {
+  height: 25px;
+  width: 300px;
+  text-align: center;
+  border-bottom: 1px solid rgba(236, 223, 223, 0.648);
+}
+#todo-form > input::placeholder {
+  color: rgba(236, 223, 223, 0.648);
+  font-size: 20px;
+  font-style: italic;
+}
+
+#todo-list {
+  width: 250px;
+  text-align: left;
+}
+
+#todo-list > li {
+  padding-bottom: 5px;
+}
+
+#todo-list > li > span {
+  padding-left: 10px;
+}
+
+/************************ 날씨  */
+#weather {
+  position: static;
+  color: white;
+  font-style: italic;
+  padding-top: 20px;
+  width: 400px;
+  height: 200px;
+  text-align: center;
+  top: 10px;
+  bottom: 10px;
+}
