@@ -1,8 +1,10 @@
+require("dotenv").config();
+
 function ok(position) {
   const lat = position.coords.latitude;
   const lon = position.coords.longitude;
   console.log("You live in", lat, lon);
-  const url = `https://api.openweathermap.org/data/2.5/weather?lat=${lat}&lon=${lon}&appid=${API_KEY}`;
+  const url = `https://api.openweathermap.org/data/2.5/weather?lat=${lat}&lon=${lon}&appid=${process.env.API_KEY}`;
   fetch(url).then((res) =>
     res.json().then((data) => {
       const weather = document.querySelector("#weather span:first-child");
