@@ -1,5 +1,11 @@
 import { useEffect, useState } from "react";
 import Movie from "../components/Movie";
+import styled from "styled-components";
+
+let BackgroundDiv = styled.div`
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr 1fr;
+`;
 
 function Home() {
   const [loading, setLoading] = useState(true);
@@ -15,12 +21,13 @@ function Home() {
   useEffect(() => {
     getMovies();
   }, []);
+
   return (
-    <div>
+    <>
       {loading ? (
         <h1>Loading...</h1>
       ) : (
-        <div>
+        <BackgroundDiv>
           {movies.map((movie) => (
             <Movie
               key={movie.id}
@@ -29,11 +36,12 @@ function Home() {
               title={movie.title}
               summary={movie.summary}
               genres={movie.genres}
+              year={movie.year}
             />
           ))}
-        </div>
+        </BackgroundDiv>
       )}
-    </div>
+    </>
   );
 }
 
