@@ -1,7 +1,7 @@
-import PropTypes from "prop-types";
-import { Link } from "react-router-dom";
-import styled from "styled-components";
-import { useEffect, useState } from "react";
+import PropTypes from 'prop-types';
+import { Link } from 'react-router-dom';
+import styled from 'styled-components';
+import { useState } from 'react';
 
 let MovieBackDiv = styled.div`
   position: relative;
