@@ -5,6 +5,7 @@ import Login from './routes/Login';
 import Main from './routes/Main';
 import Cafe from './routes/Cafe';
 import Seat from './routes/Seat.js';
+import List from './routes/List.js';
 
 function App() {
   return (
@@ -12,7 +13,9 @@ function App() {
       <Routes>
         <Route path="/" element={<Landing />} />
         <Route path="/login" element={<Login />} />
-        <Route path="/main" element={<Main />} />
+        <Route path="/main" element={<Main />}>
+          <Route path="List" element={<List />} />
+        </Route>
         <Route path="/cafe" element={<Cafe />}>
           <Route path="seat" element={<Seat />} />
         </Route>
