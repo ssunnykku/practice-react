@@ -13,9 +13,8 @@ function App() {
       <Routes>
         <Route path="/" element={<Landing />} />
         <Route path="/login" element={<Login />} />
-        <Route path="/main" element={<Main />}>
-          <Route path="List" element={<List />} />
-        </Route>
+        <Route path="/main" element={<Main />} />
+        <Route path="/list" element={<List />} />
         <Route path="/cafe" element={<Cafe />}>
           <Route path="seat" element={<Seat />} />
         </Route>
