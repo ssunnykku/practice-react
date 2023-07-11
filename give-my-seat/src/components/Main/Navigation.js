@@ -1,5 +1,5 @@
 import React from 'react';
-import { Navbar } from '../../style/Navbar-style';
+import { Navbar } from '../../styles/Navbar-style';
 import HomeOutlined from '../../icon/HomeOutlined.svg';
 import Person from '../../icon/Person.svg';
 import Alert from '../../icon/Alert.svg';

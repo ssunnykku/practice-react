@@ -16,7 +16,7 @@ import {
   TagBack1,
   TagP,
   TagBack2,
-} from '../../style/CafeCard-style.js';
+} from '../../styles/main/CafeCard-style.js';
 
 function CafeCard() {
   return (

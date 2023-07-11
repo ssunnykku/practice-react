@@ -1,36 +1,20 @@
+// 더미데이터 만들고, 데이터 뿌려주기
+
 import React from 'react';
 
 import { styled } from 'styled-components';
 
 import MainPlus from '../icon/MainPlus.svg';
+import BackBtn from '../icon/BackBtn.svg';
 
 import CafeCard from '../components/Main/CafeCard';
 import Navigation from '../components/Main/Navigation';
-
-const MainBackgroundDiv = styled.div`
-  background-color: aliceblue;
-  height: 800px;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-`;
-
-const MainTitleBackDiv = styled.div`
-  height: 110px;
-  width: 100%;
-  display: flex;
-  justify-content: space-between;
-  padding-left: 50px;
-  align-items: center;
-`;
-
-const TitleH2 = styled.h2`
-  font-family: Pretendard;
-  font-size: 25px;
-  font-weight: 700;
-  line-height: 24px;
-  text-align: left;
-`;
+import {
+  TitleBackDiv,
+  TitleH2,
+  BackgroundDiv,
+  BackBtnImg,
+} from '../styles/main/main';
 
 const PlusBtnBackDiv = styled.div`
   display: flex;
@@ -65,19 +49,20 @@ const MainSection = styled.section`
 
 function Main() {
   return (
-    <MainBackgroundDiv>
-      <MainTitleBackDiv>
+    <BackgroundDiv>
+      <TitleBackDiv>
+        <BackBtnImg src={BackBtn} alt="back_button" />
         <TitleH2>구독 리스트</TitleH2>
         <PlusBtnBackDiv>
           <PlusBtnDiv></PlusBtnDiv>
           <MainPlusImg src={MainPlus} alt="plusBtn" />
         </PlusBtnBackDiv>
-      </MainTitleBackDiv>
+      </TitleBackDiv>
       <MainSection>
         <CafeCard />
         <Navigation />
       </MainSection>
-    </MainBackgroundDiv>
+    </BackgroundDiv>
   );
 }
 
