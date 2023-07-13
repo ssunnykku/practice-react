@@ -20,9 +20,14 @@ nextId.current는 함수가 호출될 때마다 4입니다.
 반면 useRef로 만들어진 객체는 React가 만든 전역 저장소에 저장되기 때문에 함수를 재 호출하더라도 마지막으로 업데이트한 current 값이 유지됩니다.
 https://ko.legacy.reactjs.org/docs/hooks-reference.html#useref
  */
-import React from 'react';
+import React, { useEffect } from 'react';
 
 function User({ user, onRemove, onToggle }) {
+  useEffect(() => {
+    // console.log(user);
+    // useEffect 안에서 사용하는 상태나, props 가 있다면, useEffect 의 deps 에 넣어주어야 한다. (최신 props/상태를 가르키게 하기 위해)
+  }, []);
+
   return (
     <div>
       <b
