@@ -1,8 +1,8 @@
 import './App.css';
 import React, { useRef, useState } from 'react';
-import InputSample from './InputSample';
+import InputSample from './ch10_InputSample';
 import UserList from './UserList';
-import CreateUser from './CreateUser';
+import CreateUser from './ch12_CreateUser';
 
 function App() {
   const [inputs, setInputs] = useState({
@@ -25,16 +25,19 @@ function App() {
       id: 1,
       username: 'velopert',
       email: 'public.velopert@gmail.com',
+      active: true,
     },
     {
       id: 2,
       username: 'tester',
       email: 'tester@example.com',
+      active: false,
     },
     {
       id: 3,
       username: 'liz',
       email: 'liz@example.com',
+      active: false,
     },
   ]);
 
@@ -63,6 +66,14 @@ function App() {
     setUsers(users.filter((user) => user.id !== id));
   };
 
+  const onToggle = (id) => {
+    setUsers(
+      users.map((user) => {
+        return user.id === id ? { ...user, active: !user.active } : user;
+      })
+    );
+  };
+
   return (
     <div>
       {/* <InputSample /> */}
@@ -72,7 +83,7 @@ function App() {
         onChange={onChange}
         onCreate={onCreate}
       />
-      <UserList users={users} onRemove={onRemove} />
+      <UserList users={users} onRemove={onRemove} onToggle={onToggle} />
     </div>
   );
 }
