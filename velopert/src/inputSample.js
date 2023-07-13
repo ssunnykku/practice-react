@@ -2,10 +2,6 @@
 // ref : DOM을 선택해야 할 때 사용
 // ex) 특정 엘리먼트의 크기 가져오기, 스크롤바 위치 가져오거나 설정하기, 포커스 설정 등
 // 초기화 버튼을 클릭했을 때 이름 input에 포커스가 잡히게 하기
-// 컴포넌트 안에서 조회 및 수정 할 수 있는 변수를 관리하기 : useRef로 관리하는 변수는 값이 변경되어도 컴포넌트가 리렌더링되지 않는다.
-// - setTimeout, setInterval을 통해서 만들어진 id
-// - 외부 라이브러리를 사용하여 생성된 인스턴스
-// - scroll 위치 와 같은 값을 관리할 수 있다.
 
 import React, { useState, useRef, useEffect } from 'react';
 
