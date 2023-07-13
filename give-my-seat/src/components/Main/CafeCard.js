@@ -18,17 +18,17 @@ import {
   TagBack2,
 } from '../../styles/main/CafeCard-style.js';
 
-function CafeCard() {
+function CafeCard(props) {
   return (
     <ContentDiv>
       <CafeImage src={CafeImg} alt="cafeImg" />
       <CafeInfoDiv>
         <CafeNameDiv>
-          <CafeInfoNameH3>카페 여기</CafeInfoNameH3>
+          <CafeInfoNameH3>{props.name}</CafeInfoNameH3>
           <HeartImg src={HeartFilled} alt="heart" />
         </CafeNameDiv>
         <CafeDetailDiv>
-          <CafeInfoP>서울시 마포구 와우산로 ..</CafeInfoP>
+          <CafeInfoP>{props.address}</CafeInfoP>
           <TagsDiv>
             <TagBack1>
               <TagP>분위기 좋은</TagP>

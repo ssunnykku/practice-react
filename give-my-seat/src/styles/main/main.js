@@ -17,11 +17,8 @@ const TitleBackDiv = styled.div`
   align-items: center;
 `;
 
-const BackBtnImg = styled.img`
-  width: 25px;
-`;
-
 const TitleH2 = styled.h2`
+  padding-left: 20px;
   font-family: Pretendard;
   font-size: 25px;
   font-weight: 700;
@@ -29,4 +26,4 @@ const TitleH2 = styled.h2`
   text-align: left;
 `;
 
-export { TitleBackDiv, TitleH2, BackgroundDiv, BackBtnImg };
+export { TitleBackDiv, TitleH2, BackgroundDiv };

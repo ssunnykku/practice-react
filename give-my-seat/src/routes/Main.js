@@ -5,16 +5,10 @@ import React from 'react';
 import { styled } from 'styled-components';
 
 import MainPlus from '../icon/MainPlus.svg';
-import BackBtn from '../icon/BackBtn.svg';
 
 import CafeCard from '../components/Main/CafeCard';
 import Navigation from '../components/Main/Navigation';
-import {
-  TitleBackDiv,
-  TitleH2,
-  BackgroundDiv,
-  BackBtnImg,
-} from '../styles/main/main';
+import { TitleBackDiv, TitleH2, BackgroundDiv } from '../styles/main/main';
 
 const PlusBtnBackDiv = styled.div`
   display: flex;
@@ -51,7 +45,6 @@ function Main() {
   return (
     <BackgroundDiv>
       <TitleBackDiv>
-        <BackBtnImg src={BackBtn} alt="back_button" />
         <TitleH2>구독 리스트</TitleH2>
         <PlusBtnBackDiv>
           <PlusBtnDiv></PlusBtnDiv>

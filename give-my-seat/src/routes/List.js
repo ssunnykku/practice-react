@@ -1,12 +1,15 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { styled } from 'styled-components';
 import CafeCard from '../components/Main/CafeCard';
 import Navigation from '../components/Main/Navigation';
-import { TitleH2, TitleBackDiv, BackBtnImg } from '../styles/main/main';
+import { TitleH2, TitleBackDiv } from '../styles/main/main';
 import SearchOutlined from '../icon/SearchOutlined.svg';
-import BackBtn from '../icon/BackBtn.svg';
+import axios from 'axios';
+import { useSelector, useDispatch } from 'react-redux';
+import { getCafeList } from '../redux/cafeListSlice.js';
 
 const ListBackDiv = styled.div`
+  background-color: aliceblue;
   height: 1200px;
   display: flex;
   flex-direction: column;
@@ -41,15 +44,28 @@ const SearchInput = styled.input`
   position: absolute;
 `;
 
-const NearCafeDiv = styled.div``;
+const CafeListDiv = styled.div`
+  height: 80%;
+`;
 
-const NearCafeTitle = styled.title``;
+const SortedCafeDiv = styled.div``;
+
+const SubTitleH4 = styled.h4``;
 
 function List() {
+  const cafeList = useSelector((state) => state.cafeList.cafe);
+  const dispatch = useDispatch();
+
+  useEffect(() => {
+    axios
+      .get(process.env.REACT_APP_CAFELIST_API)
+      .then((res) => res.data)
+      .then((res) => dispatch(getCafeList(res)));
+    console.log(cafeList[0]['address']);
+  }, []);
   return (
     <ListBackDiv>
       <TitleBackDiv>
-        <BackBtnImg src={BackBtn} alt="back_button" />
         <TitleH2>카페 찾기</TitleH2>
       </TitleBackDiv>
       <SearchForm>
@@ -66,18 +82,32 @@ function List() {
           </label>
         </SearchInputDiv>
       </SearchForm>
-      <NearCafeDiv>
-        <NearCafeTitle>내 주변 카페</NearCafeTitle>
-        <CafeCard />
-      </NearCafeDiv>
-      <NearCafeDiv>
-        <NearCafeTitle>인기 카페</NearCafeTitle>
-        <CafeCard />
-      </NearCafeDiv>
-      <NearCafeDiv>
-        <NearCafeTitle>한산한 카페</NearCafeTitle>
-        <CafeCard />
-      </NearCafeDiv>
+      <CafeListDiv>
+        <SortedCafeDiv>
+          <SubTitleH4>내 주변 카페</SubTitleH4>
+          {cafeList.map((cafe, i) => {
+            return (
+              <CafeCard
+                key={cafe['id']}
+                address={cafe['address']}
+                name={cafe['name']}
+                tags={cafe['tags']}
+                phoneNumber={cafe['phoneNumber']}
+                sit={cafe['sit']}
+                time={cafe['time']}
+              />
+            );
+          })}
+        </SortedCafeDiv>
+        <SortedCafeDiv>
+          <SubTitleH4>인기 카페</SubTitleH4>
+          <CafeCard />
+        </SortedCafeDiv>
+        <SortedCafeDiv>
+          <SubTitleH4>한산한 카페</SubTitleH4>
+          <CafeCard />
+        </SortedCafeDiv>
+      </CafeListDiv>
       <Navigation />
     </ListBackDiv>
   );

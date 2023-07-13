@@ -1,10 +1,6 @@
-import React, { useEffect } from 'react';
-import {
-  BackgroundDiv,
-  TitleBackDiv,
-  TitleH2,
-  BackBtnImg,
-} from '../styles/main/main';
+import React, { useEffect, useState } from 'react';
+import axios from 'axios';
+import { BackgroundDiv, TitleH2 } from '../styles/main/main';
 import { styled } from 'styled-components';
 import HeartFilled from '../icon/HeartFilled.svg';
 import HeartOutlined from '../icon/HeartOutlined.svg';
@@ -23,6 +19,18 @@ const CafeDetailInfoDiv = styled.div`
   margin-right: 35px;
 `;
 
+const TitleBackDiv = styled.div`
+  height: 110px;
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+`;
+
+const BackBtnImg = styled.img`
+  width: 25px;
+`;
+
 // 상단 아이콘
 const CafeTitleIconDiv = styled.div`
   width: 80px;
@@ -35,6 +43,10 @@ const CameraImg = styled.img`
 `;
 
 const HeartFilledImg = styled.img`
+  width: 29px;
+`;
+
+const HeartOutlinedImg = styled.img`
   width: 29px;
 `;
 
@@ -102,10 +114,12 @@ const CafeMenuContainer = styled.div`
 
 const CafeMenuDiv = styled.div`
   padding-bottom: 5px;
-  width: 200px;
+  width: 170px;
   display: flex;
-  justify-content: space-around;
+  justify-content: space-between;
 `;
+
+const CafeMenuSpan = styled.span``;
 
 const GetMoreBtn = styled.button`
   color: rgba(143, 143, 144, 1);
@@ -115,15 +129,47 @@ const GetMoreBtn = styled.button`
 `;
 
 function Cafe() {
+  const [cafeInfo, setCafeInfo] = useState([]);
+  const [cafeMenu, setCafeMenu] = useState([]);
+  const [getMore, setGetMore] = useState(false);
+  const [heart, setHeart] = useState(false);
+  useEffect(() => {
+    axios
+      .get('https://give-my-seat-default-rtdb.firebaseio.com/cafeList/0.json')
+      .then((res) => res.data)
+      .then((res) => {
+        return setCafeInfo(res);
+      });
+    cafeInfo.menu && setCafeMenu(Object.keys(cafeInfo.menu));
+    // false면 더보기 보이게, true면 더보기 없어지게
+    // 더보기 : cafeMenu.slice(7) 가 있을 때만 필요
+  }, [cafeInfo]);
+
   return (
     <BackgroundDiv>
       <CafeDetailInfoDiv>
         <TitleBackDiv>
           <BackBtnImg src={BackBtn} alt="back_button" />
-          <TitleH2>카페 여기</TitleH2>
+          <TitleH2>{cafeInfo.name}</TitleH2>
           <CafeTitleIconDiv>
             <CameraImg src={Camera} />
-            <HeartFilledImg src={HeartFilled} />
+            {heart ? (
+              <HeartFilledImg
+                type="button"
+                src={HeartFilled}
+                onClick={() => {
+                  setHeart(false);
+                }}
+              />
+            ) : (
+              <HeartOutlinedImg
+                type="button"
+                src={HeartOutlined}
+                onClick={() => {
+                  setHeart(true);
+                }}
+              />
+            )}
           </CafeTitleIconDiv>
         </TitleBackDiv>
         <CafeImg src={CafeImg2} alt="cafe_image" />
@@ -131,20 +177,18 @@ function Cafe() {
           <CafeInfoContentDiv>
             <CafeInfoDetailDiv>
               <CafeInfoDetailImg src={Vector} />
-              <CafeInfoDetailP>
-                서울특별시 강서구 어디동 무슨동 어쩌구저쩌구
-              </CafeInfoDetailP>
+              <CafeInfoDetailP>{cafeInfo.address}</CafeInfoDetailP>
             </CafeInfoDetailDiv>
             <CafeInfoDetailDiv>
               <CafeInfoDetailImg
                 src={FieldTimeOutlined}
                 alt="operating_hours"
               />
-              <CafeInfoDetailP>평일, 토요일 10:00 ~ 22:00</CafeInfoDetailP>
+              <CafeInfoDetailP>{cafeInfo.time}</CafeInfoDetailP>
             </CafeInfoDetailDiv>
             <CafeInfoDetailDiv>
               <CafeInfoDetailImg src={Phone} alt="phone_number" />
-              <CafeInfoDetailP>010-1234-5678</CafeInfoDetailP>
+              <CafeInfoDetailP>{cafeInfo.phoneNumber}8</CafeInfoDetailP>
             </CafeInfoDetailDiv>
           </CafeInfoContentDiv>
           <CafeSeatStatusBtn>좌석 현황</CafeSeatStatusBtn>
@@ -152,37 +196,43 @@ function Cafe() {
         <CafeMenuBackDiv>
           <CafeMenuTitleH4>메뉴</CafeMenuTitleH4>
           <CafeMenuContainer>
-            <CafeMenuDiv>
-              <span>아아</span>
-              <span>5000원</span>
-            </CafeMenuDiv>
-            <CafeMenuDiv>
-              {' '}
-              <span>아아</span>
-              <span>5000원</span>
-            </CafeMenuDiv>
-            <CafeMenuDiv>
-              {' '}
-              <span>아아</span>
-              <span>5000원</span>
-            </CafeMenuDiv>
-            <CafeMenuDiv>
-              {' '}
-              <span>아아</span>
-              <span>5000원</span>
-            </CafeMenuDiv>
-            <CafeMenuDiv>
-              {' '}
-              <span>아아</span>
-              <span>5000원</span>
-            </CafeMenuDiv>
-            <CafeMenuDiv>
-              {' '}
-              <span>아아</span>
-              <span>5000원</span>
-            </CafeMenuDiv>
+            {cafeMenu.slice(0, 6).map((menu) => {
+              return (
+                <CafeMenuDiv key={menu}>
+                  <span>{menu}</span>
+                  <span>{cafeInfo.menu[menu]}</span>
+                </CafeMenuDiv>
+              );
+            })}
+            {getMore &&
+              cafeMenu.slice(6).map((menu) => {
+                return (
+                  <CafeMenuDiv key={menu}>
+                    <CafeMenuSpan>{menu}</CafeMenuSpan>
+                    <CafeMenuSpan>{cafeInfo.menu[menu]}</CafeMenuSpan>
+                  </CafeMenuDiv>
+                );
+              })}
           </CafeMenuContainer>
-          <GetMoreBtn>더보기 ▼</GetMoreBtn>
+          {getMore ? (
+            <GetMoreBtn
+              type="submit"
+              onClick={() => {
+                setGetMore(false);
+              }}
+            >
+              접기 ▲{' '}
+            </GetMoreBtn>
+          ) : (
+            <GetMoreBtn
+              type="submit"
+              onClick={() => {
+                setGetMore(true);
+              }}
+            >
+              더보기 ▼
+            </GetMoreBtn>
+          )}
         </CafeMenuBackDiv>
       </CafeDetailInfoDiv>
       <Navigation />
